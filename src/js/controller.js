@@ -11,6 +11,7 @@ import 'regenerator-runtime/runtime'; //for polyfiling async/await
 //   module.hot.accept();
 // }
 
+// Recipe view
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
@@ -24,11 +25,11 @@ const controlRecipes = async function () {
     recipeView.render(mode.getSearchResults(1));
     //const recipeView = new recipeView(model.state.recipe) //if not rendering:
   } catch (err) {
-    //('We couldnt find this recipe. Please try another!');
     recipeView.renderError();
   }
 };
 
+// Search view
 const controlSearchResults = async function () {
   try {
     resultsView.renderSpinner();
@@ -52,6 +53,7 @@ const controlSearchResults = async function () {
   }
 };
 
+// Pagination view
 const controlPagination = function (goToPage) {
   // 3) Render NEW results
   resultsView.render(model.getSearchResultsPage(goToPage));
