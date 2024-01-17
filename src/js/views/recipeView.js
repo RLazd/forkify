@@ -85,7 +85,6 @@ class RecipeView extends View {
             </svg>
           </div>
 
-          </div>
           <button class="btn--round btn--bookmark">
             <svg class="">
               <use href="${icons}#icon-bookmark${
@@ -93,6 +92,8 @@ class RecipeView extends View {
     }"></use>
             </svg>
           </button>
+
+          </div>
         </div>
 
         <div class="recipe__ingredients">
