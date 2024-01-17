@@ -5,7 +5,10 @@ import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
+<<<<<<< HEAD
 import addRecipeView from './views/addRecipeView.js';
+=======
+>>>>>>> origin/main
 
 import 'core-js/stable'; //for older browsers, for polyfiling eerything else
 import 'regenerator-runtime/runtime'; //for polyfiling async/await
@@ -95,6 +98,7 @@ const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+<<<<<<< HEAD
 const controlAddRecipe = async function (newRecipe) {
   try {
     // Render spinner
@@ -126,6 +130,8 @@ const controlAddRecipe = async function (newRecipe) {
   }
 };
 
+=======
+>>>>>>> origin/main
 const init = function () {
   bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);

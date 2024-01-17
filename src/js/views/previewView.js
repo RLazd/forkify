@@ -18,6 +18,7 @@ class PreviewView extends View {
               <div class="preview__data">
                 <h4 class="preview__title">${this._data.title}</h4>
                 <p class="preview__publisher">${this._data.publisher}</p>
+<<<<<<< HEAD
 
                 <div class="preview__user-generated ${
                   this._data.key ? '' : 'hidden'
@@ -27,6 +28,9 @@ class PreviewView extends View {
                   </svg>
                 </div>
                 
+=======
+               
+>>>>>>> origin/main
               </div>
             </a>
           </li>

@@ -13,6 +13,7 @@ export const state = {
     resultsPerPage: RES_PER_PAGE,
   },
   bookmarks: [],
+<<<<<<< HEAD
 };
 
 const createRecipeObject = function (data) {
@@ -28,6 +29,8 @@ const createRecipeObject = function (data) {
     ingredients: recipe.ingredients,
     ...(recipe.key && { key: recipe.key }),
   };
+=======
+>>>>>>> origin/main
 };
 
 export const loadRecipe = async function (id) {
@@ -35,6 +38,20 @@ export const loadRecipe = async function (id) {
     const data = await AJAX(`${API_URL}${id}?key=${KEY}`);
     state.recipe = createRecipeObject(data);
 
+<<<<<<< HEAD
+=======
+    const { recipe } = data.data;
+    state.recipe = {
+      id: recipe.id,
+      title: recipe.title,
+      publisher: recipe.publisher,
+      sourceUrl: recipe.source_url,
+      image: recipe.image_url,
+      servings: recipe.servings,
+      cookingTime: recipe.cooking_time,
+      ingredients: recipe.ingredients,
+    };
+>>>>>>> origin/main
     if (state.bookmarks.some(bm => bm.id === id))
       state.recipe.bookmarked = true;
     else state.recipe.bookmarked = false;
@@ -47,7 +64,11 @@ export const loadSearchResults = async function (query) {
   try {
     state.search.query = query;
 
+<<<<<<< HEAD
     const data = await AJAX(`${API_URL}?search=${query}&key=${KEY}`);
+=======
+    const data = await getJSON(`${API_URL}?search=${query}`);
+>>>>>>> origin/main
     state.search.results = data.data.recipes.map(rec => {
       return {
         id: rec.id,
@@ -114,6 +135,7 @@ const clearBookmarks = function () {
   localStorage.clear('bookmarks');
 };
 //clearBookmarks();
+<<<<<<< HEAD
 
 export const uploadRecipe = async function (newRecipe) {
   try {
@@ -145,3 +167,5 @@ export const uploadRecipe = async function (newRecipe) {
     throw err;
   }
 };
+=======
+>>>>>>> origin/main
