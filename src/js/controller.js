@@ -7,8 +7,8 @@ import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
 
-import 'core-js/stable'; //for older browsers, for polyfiling eerything else
-import 'regenerator-runtime/runtime'; //for polyfiling async/await
+import 'core-js/stable'; //for older browsers, for polyfiling everything else
+//import 'regenerator-runtime/runtime'; //for polyfiling async/await
 
 // if (module.hot) {
 //   module.hot.accept();
@@ -75,10 +75,11 @@ const controlServings = function (newServings) {
   model.updateServings(newServings);
 
   // Update the  recipe view
-  //recipeView.render(model.state.recipe);
+  // recipeView.render(model.state.recipe);
   recipeView.update(model.state.recipe);
 };
 
+// Bookmarks view
 const controlAddBookmark = function () {
   // 1) Add or remove bookmark
   if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
