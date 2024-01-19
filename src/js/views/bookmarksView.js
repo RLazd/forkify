@@ -1,4 +1,3 @@
-import icons from '../../img/icons.svg';
 import View from './View.js';
 import previewView from './previewView.js';
 

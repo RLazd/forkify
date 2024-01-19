@@ -1,6 +1,4 @@
-//import { async } from 'regenerator-runtime';
 import { API_URL, KEY } from './config.js';
-// import { getJSON, sendJSON } from './helpers.js';
 import { AJAX } from './helpers.js';
 import { RES_PER_PAGE } from './config.js';
 
@@ -138,7 +136,6 @@ export const uploadRecipe = async function (newRecipe) {
     };
 
     const data = await AJAX(`${API_URL}?key=${KEY}`, recipe);
-    console.log(data);
     state.recipe = createRecipeObject(data);
     addBookmark(state.recipe);
   } catch (err) {

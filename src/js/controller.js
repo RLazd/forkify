@@ -6,15 +6,8 @@ import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
-
 import 'core-js/stable'; //for older browsers, for polyfiling everything else
-//import 'regenerator-runtime/runtime'; //for polyfiling async/await
 
-// if (module.hot) {
-//   module.hot.accept();
-// }
-
-// Recipe view
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
@@ -23,21 +16,20 @@ const controlRecipes = async function () {
 
     // 0) Update results view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
+
     // 1) Updating bookmarks view
     bookmarksView.update(model.state.bookmarks);
 
     // 2) Loading recipe
-    await model.loadRecipe(id); //does not return anything, just manipulates state
+    await model.loadRecipe(id);
 
     // 3) Rendering recipe
     recipeView.render(model.state.recipe);
-    //const recipeView = new recipeView(model.state.recipe) //if not rendering:
   } catch (err) {
     recipeView.renderError();
   }
 };
 
-// Search view
 const controlSearchResults = async function () {
   try {
     resultsView.renderSpinner();
@@ -50,8 +42,6 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // 3) Render results
-    //console.log(model.state.search.result); = state remains due to module.hot (PArcel thisng)
-    //resultsView.render(model.state.search.results);
     resultsView.render(model.getSearchResultsPage());
 
     // 4) Render initial pagination btns
@@ -61,12 +51,11 @@ const controlSearchResults = async function () {
   }
 };
 
-// Pagination view
 const controlPagination = function (goToPage) {
-  // 3) Render NEW results
+  // Render NEW results
   resultsView.render(model.getSearchResultsPage(goToPage));
 
-  // 4) Render NEW pagination btns
+  // Render NEW pagination btns
   paginationView.render(model.state.search);
 };
 
@@ -75,11 +64,9 @@ const controlServings = function (newServings) {
   model.updateServings(newServings);
 
   // Update the  recipe view
-  // recipeView.render(model.state.recipe);
   recipeView.update(model.state.recipe);
 };
 
-// Bookmarks view
 const controlAddBookmark = function () {
   // 1) Add or remove bookmark
   if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
@@ -103,7 +90,6 @@ const controlAddRecipe = async function (newRecipe) {
 
     // Upload the new recipe data
     await model.uploadRecipe(newRecipe);
-    console.log(model.state.recipe);
 
     // Render recipe
     recipeView.render(model.state.recipe);
@@ -112,11 +98,10 @@ const controlAddRecipe = async function (newRecipe) {
     addRecipeView.renderMessage();
 
     // Render bookmark view
-    bookmarksView.render(model.state.bookmarks); //not update but render
+    bookmarksView.render(model.state.bookmarks);
 
     // Change ID in URL
     window.history.pushState(null, '', `#${model.state.recipe.id}`);
-    //window.historyback(); // automatically goes back to previosu page
 
     // Close form window
     setTimeout(function () {

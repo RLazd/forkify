@@ -31,12 +31,6 @@ class PreviewView extends View {
             </a>
           </li>
     `;
-
-    //  <div class="preview__user-generated">
-    //    <svg>
-    //      <use href="${icons}#icon-user"></use>
-    //    </svg>
-    //  </div>;
   }
 }
 
