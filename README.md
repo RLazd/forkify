@@ -12,6 +12,7 @@ This is the final project from Udemy course The Complete JavaScript Course 2024:
 App is also deployed on Netlify: https://forkify-ralazd.netlify.app/
 
 ## Demo
+https://github.com/RLazd/forkify/assets/110335414/fb609a19-4b07-4a13-abb5-e6e2045c6a41
 
 ## Getting Started
 
