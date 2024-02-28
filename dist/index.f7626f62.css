@@ -515,6 +515,10 @@ body {
   float: right;
 }
 
+.pagination__btn--last {
+  float: inline-end;
+}
+
 .copyright {
   color: #918581;
   margin-top: 4rem;

@@ -3,10 +3,12 @@ import { MODAL_CLOSE_SEC } from './config.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
+// import resultsView from './views/sortRecipesView.js';
 import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
 import 'core-js/stable'; //for older browsers, for polyfiling everything else
+import sortRecipesView from './views/sortRecipesView.js';
 
 const controlRecipes = async function () {
   try {
@@ -43,6 +45,9 @@ const controlSearchResults = async function () {
 
     // 3) Render results
     resultsView.render(model.getSearchResultsPage());
+
+    //! Sort Recipes View
+    resultsView._generateMarkupSortBtn();
 
     // 4) Render initial pagination btns
     paginationView.render(model.state.search);

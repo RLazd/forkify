@@ -589,12 +589,15 @@ var _searchViewJs = require("./views/searchView.js");
 var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
 var _resultsViewJs = require("./views/resultsView.js");
 var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
+// import resultsView from './views/sortRecipesView.js';
 var _paginationViewJs = require("./views/paginationView.js");
 var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
 var _bookmarksViewJs = require("./views/bookmarksView.js");
 var _bookmarksViewJsDefault = parcelHelpers.interopDefault(_bookmarksViewJs);
 var _addRecipeViewJs = require("./views/addRecipeView.js");
 var _addRecipeViewJsDefault = parcelHelpers.interopDefault(_addRecipeViewJs);
+var _sortRecipesViewJs = require("./views/sortRecipesView.js");
+var _sortRecipesViewJsDefault = parcelHelpers.interopDefault(_sortRecipesViewJs);
 const controlRecipes = async function() {
     try {
         const id = window.location.hash.slice(1);
@@ -622,6 +625,8 @@ const controlSearchResults = async function() {
         await _modelJs.loadSearchResults(query);
         // 3) Render results
         (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPage());
+        //! Sort Recipes View
+        (0, _resultsViewJsDefault.default)._generateMarkupSortBtn();
         // 4) Render initial pagination btns
         (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
     } catch (err) {
@@ -685,7 +690,7 @@ const init = function() {
 };
 init();
 
-},{"core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./config.js":"k5Hzs","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","./views/bookmarksView.js":"4Lqzq","./views/addRecipeView.js":"i6DNj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./config.js":"k5Hzs","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","./views/bookmarksView.js":"4Lqzq","./views/addRecipeView.js":"i6DNj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/sortRecipesView.js":"d0aKU"}],"49tUX":[function(require,module,exports) {
 "use strict";
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require("52e9b3eefbbce1ed");
@@ -2535,6 +2540,18 @@ class ResultsView extends (0, _viewJsDefault.default) {
     _generateMarkup() {
         return this._data.map((result)=>(0, _previewViewJsDefault.default).render(result, false)).join("");
     }
+    //!
+    _generateMarkupSortBtn() {
+        const markup = `
+          <button class="btn--inline pagination__btn--next">
+            <span>${"hello"}</span>
+            <!--<svg class="search__icon">
+              <use href="${""}#icon-arrow-right"></use>
+            </svg> -->
+          </button>
+      `;
+        this._parentElement.insertAdjacentHTML("afterbegin", markup);
+    }
 }
 exports.default = new ResultsView();
 
@@ -2597,8 +2614,13 @@ class PaginationView extends (0, _viewJsDefault.default) {
         if (curPage === 1 && numPages > 1) return this._generateMarkupBtnNext(curPage);
         // Last page
         if (curPage === numPages && numPages > 1) return this._generateMarkupBtnPrevious(curPage);
-        // Other pages
-        if (curPage < numPages) return `${this._generateMarkupBtnPrevious(curPage)}${this._generateMarkupBtnNext(curPage)}`;
+        //
+        if (curPage < numPages - 1) return `${this._generateMarkupBtnPrevious(curPage)}
+      ${this._generateMarkupBtnLast(numPages)}
+      ${this._generateMarkupBtnNext(curPage)}`;
+        // Other
+        if (curPage < numPages) return `${this._generateMarkupBtnPrevious(curPage)}
+      ${this._generateMarkupBtnNext(curPage)}`;
         // Page 1 and no other pages
         return "";
     }
@@ -2608,14 +2630,26 @@ class PaginationView extends (0, _viewJsDefault.default) {
             <svg class="search__icon">
               <use href="${0, _iconsSvgDefault.default}#icon-arrow-left"></use>
             </svg>
-            <span>Page ${curPage - 1}</span>
+            <span>${curPage - 1}</span>
           </button>
          `;
     }
     _generateMarkupBtnNext(curPage) {
         return `
           <button data-goto="${curPage + 1}"  class="btn--inline pagination__btn--next">
-            <span>Page ${curPage + 1}</span>
+            <span>${curPage + 1}</span>
+            <svg class="search__icon">
+              <use href="${0, _iconsSvgDefault.default}#icon-arrow-right"></use>
+            </svg>
+          </button>
+      `;
+    }
+    _generateMarkupBtnLast(numPages) {
+        return `
+          <button data-goto="${numPages}" class="btn--inline pagination__btn--last">
+            <svg class="search__icon">
+              <use href="${0, _iconsSvgDefault.default}#icon-arrow-right"></use>
+            </svg>
             <svg class="search__icon">
               <use href="${0, _iconsSvgDefault.default}#icon-arrow-right"></use>
             </svg>
@@ -2686,6 +2720,28 @@ class AddRecipeView extends (0, _viewJsDefault.default) {
     _generateMarkup() {}
 }
 exports.default = new AddRecipeView();
+
+},{"./View.js":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d0aKU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./View.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+class SortRecipesView extends (0, _viewJsDefault.default) {
+    _parentElement = document.querySelector(".results");
+    _errorMessage = "No recipes founds!";
+    _successMessage = "";
+    _generateMarkupSortBtn() {
+        return `
+          <button data-goto="${i}"  class="btn--inline pagination__btn--next">
+            <span>${i}</span>
+            <svg class="search__icon">
+              <use href="${i}#icon-arrow-right"></use>
+            </svg>
+          </button>
+      `;
+    }
+}
+exports.default = new SortRecipesView();
 
 },{"./View.js":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["f0HGD","aenu9"], "aenu9", "parcelRequire3a11")
 
