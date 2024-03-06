@@ -3,7 +3,6 @@ import { MODAL_CLOSE_SEC } from './config.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
-// import resultsView from './views/sortRecipesView.js';
 import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
@@ -47,7 +46,7 @@ const controlSearchResults = async function () {
     resultsView.render(model.getSearchResultsPage());
 
     //! Sort Recipes View
-    resultsView._generateMarkupSortBtn();
+    sortRecipesView._renderMarkupSort();
 
     // 4) Render initial pagination btns
     paginationView.render(model.state.search);
@@ -125,5 +124,6 @@ const init = function () {
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
   addRecipeView.addHandlerUpload(controlAddRecipe);
+  //sortRecipesView.addHandlerSort()
 };
 init();

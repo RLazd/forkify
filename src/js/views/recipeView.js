@@ -1,5 +1,4 @@
 import View from './View.js';
-
 import icons from '../../img/icons.svg'; //url: used for static assets
 import fracty from 'fracty'; //any packages from npm -> no neet to specify path
 

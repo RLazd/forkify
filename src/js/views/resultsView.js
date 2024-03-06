@@ -11,19 +11,25 @@ class ResultsView extends View {
   }
 
   //!
+  // #generateMarkupSort() {
+  //   return `
+  //             <div class="sort-by-container">
+  //               <!--<label for="sort">Sort</label>-->
+  //               <select  class="sort-by" id="sort-by" name="sort-by">
+  //                 <option value="">Sort By</option>
+  //                 <option value="time-from-highest">Cooking time &uarr;</option>
+  //                 <option value="time-from-lowest">Cooking time &darr;</option>
+  //                 <option value="ingredients-least">Ingredients &uarr;</option>
+  //               </select>
+  //             </div>
+  //          `;
+  // }
 
-  _generateMarkupSortBtn() {
-    const markup = `
-          <button class="btn--inline pagination__btn--next">
-            <span>${'hello'}</span>
-            <!--<svg class="search__icon">
-              <use href="${''}#icon-arrow-right"></use>
-            </svg> -->
-          </button>
-      `;
-
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
-  }
+  // _renderMarkupSort() {
+  //   this.document
+  //     .querySelector('.search-results')
+  //     .insertAdjacentHTML('afterbegin', this.#generateMarkupSort());
+  // }
 }
 
 export default new ResultsView();

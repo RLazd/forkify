@@ -11,7 +11,7 @@ export default class View {
    * @this {Object} View instance
    * @todo Finish implementation
    */
-  render(data, render = true) {
+  render(data, render = true, insertLocation = 'afterbegin') {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
 
@@ -20,7 +20,7 @@ export default class View {
 
     if (!render) return markup;
     this._clear();
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    this._parentElement.insertAdjacentHTML(insertLocation, markup);
   }
 
   update(data) {

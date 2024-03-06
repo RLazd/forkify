@@ -487,7 +487,7 @@ body {
 
 .search-results {
   flex-direction: column;
-  padding: 3rem 0;
+  padding: 2rem 0;
   display: flex;
 }
 
@@ -528,6 +528,29 @@ body {
 
 .copyright .twitter-link:link, .copyright .twitter-link:visited {
   color: #918581;
+}
+
+.sort-by-container {
+  align-self: flex-end;
+  margin: 1rem 3.25rem;
+}
+
+.sort-by {
+  letter-spacing: .05em;
+  color: #f38e82;
+  border: 1px solid #fbdb89;
+  border-radius: 1rem;
+  padding: .5rem 1rem;
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+
+.sort-by:hover {
+  background-color: #f9f5f3;
+}
+
+.sort-by * {
+  border: 4px solid #fbdb89;
 }
 
 .recipe {

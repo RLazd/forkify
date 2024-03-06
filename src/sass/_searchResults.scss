@@ -1,5 +1,5 @@
 .search-results {
-  padding: 3rem 0;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
 }
@@ -42,4 +42,39 @@
   .twitter-link:visited {
     color: $color-grey-dark-2;
   }
+}
+
+.sort-by-container {
+  // align-content: center;
+  align-self: flex-end;
+  margin: 1rem 3.25rem;
+}
+
+.sort-by {
+  // appearance: none;
+  font-size: 1.45rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+
+  color: #f38e82;
+  border: 1px solid #fbdb89;
+
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+
+  // background-color: $color-grey-light-1;
+
+  // &:hover {
+  //   background-color: $color-grey-light-1;
+  // }
+}
+
+.sort-by:hover {
+  // background-color: #fff;
+  background-color: $color-grey-light-1;
+}
+
+.sort-by * {
+  // background-color: #fff;
+  border: 4px solid #fbdb89;
 }

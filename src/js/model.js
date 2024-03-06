@@ -1,6 +1,7 @@
 import { API_URL, KEY } from './config.js';
 import { AJAX } from './helpers.js';
 import { RES_PER_PAGE } from './config.js';
+//import { sort } from 'core-js/core/array';
 
 export const state = {
   recipe: {},
@@ -46,6 +47,8 @@ export const loadSearchResults = async function (query) {
     state.search.query = query;
 
     const data = await AJAX(`${API_URL}?search=${query}&key=${KEY}`);
+    //!
+
     state.search.results = data.data.recipes.map(rec => {
       return {
         id: rec.id,
@@ -56,10 +59,44 @@ export const loadSearchResults = async function (query) {
         ...(rec.key && { key: rec.key }),
       };
     });
+
+    //TODO
+    sortSearchResults();
+
     state.search.page = 1;
   } catch (err) {
     throw err;
   }
+};
+
+//TODO
+const sortSearchResults = async function () {
+  const urls = state.search.results.map(
+    rec => `${API_URL}${rec.id}?key=${KEY}`
+  );
+
+  const promises = urls.map(url => {
+    return fetch(url) // Assuming fetch API for AJAX requests
+      .then(response => response.json()); // Assuming JSON response
+  });
+
+  Promise.all(promises)
+    .then(dataArray => {
+      // All AJAX requests have completed successfully
+      console.log('All data received:', dataArray);
+    })
+    .catch(error => {
+      // At least one AJAX request has failed
+      console.error('An error occurred:', error);
+    });
+
+  // state.search.results = await Promise.all(
+  //   state.search.results.map(rec => {
+  //     const data = AJAX(`${API_URL}${rec.id}?key=${KEY}`);
+  //     //console.log(data.map(rec = >));
+  //     //console.log(data.data.recipe.ingredients);
+  //   })
+  //);
 };
 
 export const getSearchResultsPage = function (page = state.search.page) {
